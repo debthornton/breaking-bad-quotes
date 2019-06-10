@@ -2,6 +2,7 @@
 const ul = document.querySelector('ul');
 const nextButton = document.querySelector('#next');
 const previousButton = document.querySelector('#previous');
+const refreshButton = document.querySelector('#refresh');
 let marginLeft = 0;
 
 // Breaking Bad quote API source
@@ -9,18 +10,18 @@ const api = `https://breaking-bad-quotes.herokuapp.com/v1/quotes/20`;
 
 // Retrieve API data
 fetch(api)
-.then(function(response) {   
+.then((response) => {   
     return response.json();
 })
-.then(function(data) {
+.then((data) => {
     // check margins to determine ul placement
     checkPosition();
 
     // Create a new li element parent with div and p children for each quote
-    data.forEach(function(quote) {
-        let li = document.createElement('li');
-        let p = document.createElement('p');
-        let div = document.createElement('div');
+    data.forEach((quote) => {
+        const li = document.createElement('li');
+        const p = document.createElement('p');
+        const div = document.createElement('div');
 
         // set each p text content with quote
         p.textContent = `${quote.quote}`;
@@ -33,7 +34,7 @@ fetch(api)
     });
 });
 
-function checkPosition() {
+const checkPosition = () => {
     // if ul is utmost left, disable previousButton
     if(marginLeft === 0) {
         previousButton.style.pointerEvents = 'none';
@@ -49,15 +50,14 @@ function checkPosition() {
     }
 }
 
-function next() {
+const next = () => {
     // move ul margin-left -100%;  
     marginLeft -= 100;
     checkPosition();
     ul.style.marginLeft = `${marginLeft}%`;  
-    console.log(marginLeft);
 }
 
-function previous() {
+const previous = () => {
     // move ul margin-left +100%;  
     marginLeft += 100;
     checkPosition();
@@ -65,10 +65,14 @@ function previous() {
 }
 
 // handlers
-nextButton.addEventListener('click', function() {
+nextButton.addEventListener('click', () => {
     next();
 });
 
-previousButton.addEventListener('click', function() {
+previousButton.addEventListener('click', () => {
     previous();
+});
+
+refreshButton.addEventListener('click', () => {
+    location.reload();
 });
