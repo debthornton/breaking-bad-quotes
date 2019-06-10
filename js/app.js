@@ -27,7 +27,7 @@ const fetchFunction = () => {
                     // replace p text content when reloading quotes
                     pArr[data.indexOf(quote)].textContent = `${quote.quote}`;
                     // replace div text content when reloading quotes
-                    divArr[data.indexOf(quote)].textContent = `${quote.author}`;   
+                    divArr[data.indexOf(quote)].textContent = `- ${quote.author}`;   
                 }); 
             } else {
             // Create a new li element parent with div and p children for each quote on initial load
